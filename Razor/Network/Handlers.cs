@@ -2086,6 +2086,10 @@ namespace Assistant
                 World.AddItem(item = Item.Factory(serial & 0x7FFFFFFF, itemID));
                 isNew = true;
             }
+            else
+            {
+                item.TypeID = itemID;
+            }
 
 
             item.Container = null;
