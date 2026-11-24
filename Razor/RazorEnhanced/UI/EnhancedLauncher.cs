@@ -259,33 +259,8 @@ namespace RazorEnhanced.UI
                              selected.OSIEnc, selected.Selected, selected.StartTypeSelected);
             }
 
-            // Genero Login.cfg
-            StreamWriter login;
-            string LoginString = "LoginServer=" + hostLabel.Text + "," + portLabel.Text;
-            string logincfgpath = clientPathLabel.Text.Substring(0, clientPathLabel.Text.LastIndexOf("\\") + 1);
-
-            try
-            {
-                if (!File.Exists(logincfgpath + "login.cfg"))
-                {
-                    login = new StreamWriter(logincfgpath + "login.cfg");
-                }
-                else
-                {
-                    File.Delete(logincfgpath + "login.cfg");
-                    login = new StreamWriter(logincfgpath + "login.cfg");
-                }
-                login.WriteLine(LoginString);
-                login.Close();
-            }
-            catch (Exception ex)
-            {
-                var dialogResult = RazorEnhanced.UI.RE_MessageBox.Show("Login Config Failure",
-                        $"Unable to read login file: {logincfgpath + "login.cfg"}\r\nError:\r\n{ex}",
-                        ok: "Ok", no: null, cancel: null, backColor: null);
-
-                this.Close();
-            }
+            // login.cfg is the client's bootstrap address only; Crypt.dll's HookConnect
+            // redirects the client to the selected shard, so the file is left untouched.
         }
 
 
@@ -302,11 +277,6 @@ namespace RazorEnhanced.UI
                              selected.Host, selected.Port, selected.PatchEnc,
                              selected.OSIEnc, selected.Selected, selected.StartTypeSelected);
             }
-
-            // Need to fix up settuings.json
-            //StreamWriter login;
-            //string LoginString = "LoginServer=" + hostLabel.Text + "," + portLabel.Text;
-            //string logincfgpath = cuoClientLabel.Text.Substring(0, cuoClientLabel.Text.LastIndexOf("\\") + 1);
         }
 
 
